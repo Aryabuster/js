@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GA Hit Builder</title>
+	<meta name="Author" content="Arya">
+	<meta name="DEscription" content="GA Webtest Tool">
+	<meta name="KEYWords" content="google analytics">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!--  GA tag start -->
+
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+function CreateTracker(){
+
+	
+	ga('create', document.getElementById("PropertyID").value , 'auto');
+	alert("Already created a Tracker! Your Property ID is:" + document.getElementById("PropertyID").value );	
+	
+}
+
+function PageView() {
+  ga('send', 'pageview');
+  alert("Sent a pageview sucessfully!");
+}
+
+function ScreenView() {
+	ga('send', 'screenview', {
+  'appName': document.getElementById("AppName").value ,
+  'screenName': document.getElementById("ScreenName").value
+	});
+
+	alert("Sent a screenview sucessfully! AppName:"  + document.getElementById("AppName").value + " ScreenName:" + document.getElementById("ScreenName").value );
+
+}
+
+function EventHit1() {
+
+ga('send', {
+  hitType: 'event',
+  eventCategory: document.getElementById("EventCategory1").value ,
+  eventAction: document.getElementById("EventAction1").value ,
+  eventLabel: document.getElementById("EventLabel1").value ,
+  eventValue: document.getElementById("EventValue1").value ,
+});
+
+  alert("Sent EventHit2 successfully! EventCategory:" + document.getElementById("EventCategory1").value + " EventAction:" + document.getElementById("EventAction1").value + " EventLabel:" + document.getElementById("EventLabel1").value );
+}
+
+
+function TransactionHit(){
+
+  ga('ecommerce:addTransaction', {
+  'id': document.getElementById("TransactionID").value ,
+  'affiliation':  document.getElementById("Affiliation").value ,
+  'revenue': document.getElementById("Revenue").value,
+  'shipping': document.getElementById("Shipping").value,
+  'tax': document.getElementById("Tax").value,
+  'currency': document.getElementById("Currency").value  // local currency code.
+});
+
+  alert("Sent Transaction Hit successfully!");
+}
+
+function ItemHit(){
+ ga('ecommerce:addItem', {
+    'id': document.getElementById("ITransactionID").value,
+    'name': document.getElementById("Name").value,
+    'sku': document.getElementById("Sku").value,
+    'category': document.getElementById("Category").value,
+    'price': document.getElementById("Price").value,
+    'quantity': document.getElementById("Quantity").value,
+    'currency':  document.getElementById("ICurrency").value // local currency code.
+  });
+ alert("Sent item Hit successfully!");
+}
+
+function SocialHit(){
+
+  ga('send', {
+  hitType: 'social',
+  socialNetwork: document.getElementById("socialNetwork").value,
+  socialAction: document.getElementById("socialAction").value,
+  socialTarget: document.getElementById("SocialTarget").value,
+});
+   alert("Sent social Hit successfully!");
+}
+
+
+
+
+
+</script>
+
+<!-- GA tag end -->
+
+<!-- css -->
+<style type="text/css">
+	
+	.jumbotron {
+	background-color: #FFA500;
+	color: white;
+	}
+
+	
+
+	.btn {
+	background-color: #FFA500; /* pink */
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+
+	}
+
+	form-control{
+
+	}
+
+	strong {
+
+		font-size: 26px;
+		font-family: Arial;
+	}
+
+
+	h1 {
+		font-color: #FFA500;
+	}
+
+</style>
+
+</head>
+<body  bgcolor="#F0F8FF">
+
+<div class="container">
+
+<div class="jumbotron">
+<h1>GA Hit Builder</h1>
+</div>
+
+<p>
+<strong>Create a tracker</strong> <br>
+
+<div>
+      <label for="focusedInput">Property ID(required):</label>
+      <input class="form-control" id="PropertyID" type="text">
+</div>
+
+<br>
+
+<input type="Button" class="btn" value="Create Tracker" onclick="CreateTracker()">
+
+<br>
+<br>
+<hr />
+
+<strong>Send a pageview</strong> <br><br>
+<input type="Button" class="btn" value="Send PageView Hit" onclick="PageView()">
+
+<br>
+<br>
+<hr />
+
+<strong>Send a screenview</strong> <br><br>
+
+<div>
+      <label for="focusedInput">App Name(required):</label>
+      <input class="form-control" id="AppName" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Screen Name(required):</label>
+      <input class="form-control" id="ScreenName" type="text">
+</div>
+
+<br />
+
+<input type="Button" class="btn" value="Send ScreenView Hit" onclick="ScreenView()">
+
+
+<br>
+<hr />
+
+<strong>Send an event hit</strong> <br><br>
+
+<div>
+      <label for="focusedInput">Event Category: </label>
+      <input class="form-control" id="EventCategory1" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Event Action: </label>
+      <input class="form-control" id="EventAction1" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Event Label: </label>
+      <input class="form-control" id="EventLabel1" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Event Value: </label>
+      <input class="form-control" id="EventValue1" type="text">
+</div>
+<br />
+
+
+<input type="Button" class="btn" value="Send Event Hit" onclick="EventHit1()">
+
+<br>
+<hr />
+
+<strong>Send a transaction hit</strong> <br><br>
+
+<div>
+      <label for="focusedInput">Transaction id: </label>
+      <input class="form-control" id="TransactionID" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Affiliation: </label>
+      <input class="form-control" id="Affiliation" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Revenue: </label>
+      <input class="form-control" id="Revenue" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Shipping: </label>
+      <input class="form-control" id="Shipping" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Tax: </label>
+      <input class="form-control" id="Tax" type="text">
+</div>
+
+
+<div>
+      <label for="focusedInput">Currency: </label>
+      <input class="form-control" id="Currency" type="text">
+</div>
+<br />
+
+<input type="Button" class="btn" value="Send Transaction Hit" onclick="TransactionHit()">
+
+<br>
+<hr />
+
+<strong>Send an item hit</strong> <br><br>
+
+<div>
+      <label for="focusedInput">Transaction id: </label>
+      <input class="form-control" id="ITransactionID" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Name: </label>
+      <input class="form-control" id="Name" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Sku: </label>
+      <input class="form-control" id="Sku" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Category: </label>
+      <input class="form-control" id="Category" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Price: </label>
+      <input class="form-control" id="Price" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Quantity: </label>
+      <input class="form-control" id="Quantity" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Currency: </label>
+      <input class="form-control" id="ICurrency" type="text">
+</div>
+
+<br />
+
+<input type="Button" class="btn" value="Send Item Hit" onclick="ItemHit()">
+
+<br />
+<hr />
+
+<strong>Send a Social hit</strong> <br><br>
+
+<div>
+      <label for="focusedInput">Social Network: </label>
+      <input class="form-control" id="SocialNetwork" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Social Action: </label>
+      <input class="form-control" id="SocialAction" type="text">
+</div>
+
+<div>
+      <label for="focusedInput">Social Target: </label>
+      <input class="form-control" id="SocialTarget" type="text">
+</div>
+
+<br>
+
+<input type="Button" class="btn" value="Send Social Hit" onclick="SocialHit()">
+
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+</body>
+</html>
